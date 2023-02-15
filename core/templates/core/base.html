@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>{% block title %}{% endblock %}</title>
+        {% load static %}
+
+        <!-- CSS FILES -->    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">                    
+        <link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <link href="{% static 'core/css/bootstrap-icons.css' %}" rel="stylesheet">
+
+        <link href="{% static 'core/css/tooplate-crispy-kitchen.css' %}" rel="stylesheet">
+        
+<!--
+
+Tooplate 2129 Crispy Kitchen
+
+https://www.tooplate.com/view/2129-crispy-kitchen
+
+-->
+    </head>
+    
+    <body>
+        
+        <nav class="navbar navbar-expand-lg bg-white shadow-lg">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <a class="navbar-brand" href="{%url 'index'%}">
+                    Crispy Kitchen
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{%url 'index'%}">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{%url 'about'%}">Historia</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/menu/' %}active{% endif %}" href="{%url 'menu'%}">Menú</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/news/' %}active{% endif %}" href="{%url 'news'%}">Noticias</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}" href="{%url 'contact'%}">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="site-footer section-padding">
+            
+            <div class="container">
+                
+                <div class="row">
+
+                    <div class="col-12">
+                        <h4 class="text-white mb-4 me-5">Crispy Kitchen</h4>
+                    </div>
+
+                    <div class="col-lg-4 col-md-7 col-xs-12 tooplate-mt30">
+                        <h6 class="text-white mb-lg-4 mb-3">Ubicación</h6>
+
+                        <p>Av. Michelena</p>
+
+                        <a href="https://www.google.com/maps/place/Av.+Michelena,+Quito/@-0.2479142,-78.5337139,20z/data=!4m6!3m5!1s0x91d5991abd38143f:0xaee3c9ecffe1d7f5!8m2!3d-0.2480751!4d-78.5335449!16s%2Fg%2F1tmxgmj3" class="custom-btn btn btn-dark mt-2">Directions</a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-5 col-xs-12 tooplate-mt30">
+                        <h6 class="text-white mb-lg-4 mb-3">Horarios</h6>
+
+                        <p class="mb-2">Lunes - Viernes</p>
+
+                        <p>10:00 AM - 08:00 PM</p>
+
+                        <p>Tel: <a href="tel: 0999711098" class="tel-link">0999711098</a></p>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
+                        <h6 class="text-white mb-lg-4 mb-3">Social</h6>
+
+                        
+                        <ul class="social-icon">
+                        {% if LINK_FACEBOOK != null %}
+                            <li><a href="{{LINK_FACEBOOK}}" target="_blank"
+                                 class="social-icon-link bi-facebook"></a></li>
+                        {% endif %}
+                        {% if LINK_INSTAGRAM != null %}
+                            <li><a href="{{LINK_INSTAGRAM}}" target="_blank"
+                                 class="social-icon-link bi-instagram"></a></li>
+                        {% endif %}
+                        {% if LINK_TWITTER != null %}
+                            <li><a href="{{LINK_TWITTER}}" target="_blank"
+                            	 class="social-icon-link bi-twitter"></a></li>
+                        {% endif %}
+                        {% if LINK_YT != null %}
+                            <li><a href="{{LINK_YT}}" target="_blank"
+                                 class="social-icon-link bi-youtube"></a></li>
+                        {% endif %}
+                        </ul>
+                    
+                        <p class="copyright-text tooplate-mt60">Copyright © 2022 Crispy Kitchen Co., Ltd.
+                        <br>Design: <a rel="nofollow" href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>
+
+                    </div>
+
+                </div><!-- row ending -->
+
+                <div class="row" >
+                    <p class="m-0 mbt">
+                        {% load pages_sample %}
+                        {% get_page_list as pages_list %}
+                        {% for page in pages_list %}
+                        <a href="{% url 'page' page.id %}" class="link" text-aligne="center">{{page.title}}</a>{% if not forloop.last %} - {% endif %}
+                        {% endfor %}
+                    </p>
+                </div>
+                
+             </div><!-- container ending -->
+             
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="{% static 'core/js/jquery.min.js' %}"></script>
+        <script src="{% static 'core/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'core/js/custom.js' %}"></script>
+
+    </body>
+</html>
